@@ -3,11 +3,7 @@ import os
 from flask import render_template
 from app import app
 
-
-@app.route('/static/<path:path>')
-def static_proxy(path):
-    return app.send_static_file(os.path.join('app', 'static', path.strip()))
-
+here = os.path.abspath(os.path.dirname(__file__))
 
 @app.route('/')
 @app.route('/index')
@@ -20,13 +16,3 @@ def index():
 def downloads():
     return render_template('downloads.html',
                            title='Downloads')
-
-
-@app.route('/cat')
-def root():
-    return static_proxy('cat.jpg')
-
-
-@app.route('/dog')
-def dog():
-    return static_proxy('something.txt')
