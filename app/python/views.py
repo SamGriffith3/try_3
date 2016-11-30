@@ -2,6 +2,11 @@ from flask import render_template, flash, Flask
 from app import app
 
 
+@app.route('/static/<path:path>')
+def static_proxy(path):
+    return app.send_static_file('static/' + path)
+
+
 @app.route('/')
 @app.route('/index')
 def index():
