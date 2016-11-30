@@ -1,10 +1,12 @@
-from flask import render_template, flash, Flask
+import os
+
+from flask import render_template
 from app import app
 
 
 @app.route('/static/<path:path>')
 def static_proxy(path):
-    return app.send_static_file('static/' + path)
+    return app.send_static_file(os.path.join('app', 'static', path.strip()))
 
 
 @app.route('/')
@@ -22,9 +24,9 @@ def downloads():
 
 @app.route('/cat')
 def root():
-    return app.send_static_file('cat.jpg')
+    return static_proxy('cat.jpg')
 
 
 @app.route('/dog')
 def dog():
-    return app.send_static_file('something.txt')
+    return static_proxy('something.txt')
