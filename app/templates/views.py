@@ -2,7 +2,6 @@ from flask import render_template, flash, Flask
 from app import app
 
 
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -18,10 +17,9 @@ def downloads():
 
 @app.route('/cat')
 def root():
-    return app.send_static_file('something.txt')
+    return app.send_static_file('cat.jpg')
 
 
 @app.route('/dog')
 def dog():
-    return render_template('index.html',
-                           title='Dog')
+    return app.send_static_file('something.txt')
